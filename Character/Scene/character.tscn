@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://u372my003esv"]
+
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="1_f2q7t"]
+[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="2_jyvvi"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_kmlyq"]
+[ext_resource type="PackedScene" uid="uid://njx823gyk04n" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn" id="3_n11x6"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="4_413hc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kmlyq"]
+
+[node name="Character" type="XROrigin3D"]
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_f2q7t")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
+shape = SubResource("CapsuleShape3D_kmlyq")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="Right" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="Right" instance=ExtResource("2_jyvvi")]
+
+[node name="Left" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="Left" instance=ExtResource("3_n11x6")]
+
+[node name="MovementDirect" parent="Left" instance=ExtResource("3_kmlyq")]
+
+[node name="MovementTurn" parent="Left" instance=ExtResource("4_413hc")]
