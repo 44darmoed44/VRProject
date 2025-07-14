@@ -4,8 +4,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykkuk"]
 resource_name = "material_0"
+shading_mode = 0
 albedo_texture = ExtResource("1_jkmov")
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hky7q"]
 _surfaces = [{
