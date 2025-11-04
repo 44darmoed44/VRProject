@@ -9,7 +9,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "45b0a93bce2115e0a8bed1548f244e2e"
+"md5": "3ecd0a4fb4ab7246405e8a3ec3877b47"
 }
 
 [deps]
@@ -22,6 +22,8 @@ dest_files=["res://.godot/imported/ph4_0.jpg-4bdb9eb9f9be38c66196a622b37e3c62.s3
 compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -29,6 +31,10 @@ mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
