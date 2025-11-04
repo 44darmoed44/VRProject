@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://p8uep76k3i86"]
+
+[resource]
+blend_mode = 1
+no_depth_test = true
+diffuse_mode = 3

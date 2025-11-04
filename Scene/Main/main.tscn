@@ -19,12 +19,12 @@
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_r34rm"]
+[sub_resource type="Sky" id="Sky_ymll4"]
 sky_material = SubResource("ProceduralSkyMaterial_sblpm")
 
 [sub_resource type="Environment" id="Environment_2wwxx"]
 background_mode = 2
-sky = SubResource("Sky_r34rm")
+sky = SubResource("Sky_ymll4")
 tonemap_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_rlixt"]

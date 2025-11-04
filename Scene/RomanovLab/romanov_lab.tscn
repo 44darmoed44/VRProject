@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjl1nef6uixs2"]
+
+[ext_resource type="Script" uid="uid://bco3stoc0msuy" path="res://Script/main.gd" id="1_8fvo0"]
+[ext_resource type="PackedScene" uid="uid://u372my003esv" path="res://Character/Scene/character.tscn" id="1_24b63"]
+[ext_resource type="PackedScene" uid="uid://dxs5b88fq5cwa" path="res://Models/RomanovLab/r_l_room.tscn" id="3_6oek4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fsr02"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_r34rm"]
+sky_material = SubResource("ProceduralSkyMaterial_fsr02")
+
+[sub_resource type="Environment" id="Environment_kay8n"]
+background_mode = 2
+sky = SubResource("Sky_r34rm")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_bo8o0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_da3xo"]
+
+[node name="RomanovLab" type="Node3D"]
+script = ExtResource("1_8fvo0")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_kay8n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(100, 0, 0, 0, 0.25, 0, 0, 0, 100, 0, -0.264556, 0)
+mesh = SubResource("BoxMesh_bo8o0")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_da3xo")
+
+[node name="Character" parent="." instance=ExtResource("1_24b63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6856736, 0)
+
+[node name="RLRoom1" parent="." instance=ExtResource("3_6oek4")]
+room_name = "1"
