@@ -37,7 +37,11 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6oek4"]
 resource_name = "transit_in"
+<<<<<<< HEAD
 length = 0.25
+=======
+length = 0.45
+>>>>>>> b10070d46fdfac4bf5ee45dd08b76c87f1aba967
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +49,11 @@ tracks/0/path = NodePath("Environment/WorldEnvironment:environment:tonemap_expos
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+<<<<<<< HEAD
 "times": PackedFloat32Array(0, 0.25),
+=======
+"times": PackedFloat32Array(0, 0.45),
+>>>>>>> b10070d46fdfac4bf5ee45dd08b76c87f1aba967
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
