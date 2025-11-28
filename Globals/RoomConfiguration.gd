@@ -71,7 +71,12 @@ var room_config = {
 			"back" : "6",
 			"right" : "pass",
 			"left" : "4",
-			"ratio_y" : 13.8
+			"ratio_y" : 13.8,
+			"lab_transf" : {
+				"pos" : "forward",
+				"next_lab" : "kitchen_lab",
+				"next_room" : "8"
+			}
 		},
 		"6" : {
 			"forward" : "5",

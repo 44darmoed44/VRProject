@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VRProject"
-run/main_scene="uid://bjl1nef6uixs2"
+run/main_scene="uid://dm4c3wrya6ytw"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

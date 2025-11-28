@@ -12,6 +12,7 @@ class_name RoomUpdater
 	"right" : $MoveRight,
 	"left" : $MoveLeft
 }
+@onready var transf_node := $TransfBTN
 
 var room: Node3D
 var next_room_name: String
@@ -43,10 +44,30 @@ func load_room(new_room_name: String = room_name):
 	
 	# disabled "pass" transfer buttons
 	var room_btn_dict = RoomConfiguration.room_config[type_laboratory][room_name]
+	var lab_trasf_key = null
 	for key in room_btn_dict.keys():
 		if key == "ratio_y": continue
+		if key == "lab_transf": 
+			lab_trasf_key = key
+			continue
 		if room_btn_dict[key] == "pass":
 			disable_transfer_btn(key)
+	
+	if lab_trasf_key == null:
+		var tn_children = transf_node.get_children()
+		if tn_children.size() > 0:
+			for child in tn_children:
+				child.queue_free()
+	else:
+		var tn_btn_inst : PackedScene = load("res://UI/EnterOtherLabBTN/lab_trans_viewport.tscn")
+		var tn_btn = tn_btn_inst.instantiate()
+		transf_node.add_child(tn_btn)
+		
+		var btn_par_dict = room_btn_dict[lab_trasf_key]
+		tn_btn.position = btn_dict[btn_par_dict["pos"]].position
+		tn_btn.position.y = 5
+		tn_btn.update_data(btn_par_dict["next_lab"], btn_par_dict["next_room"])
+	
 
 func clear_room():
 	room_model.remove_child(room)
