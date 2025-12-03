@@ -1,5 +1,7 @@
 extends Node
 
+var room_updater: RoomUpdater
+
 var room_preload = {
 	"rm_lab" : {
 		"1" : preload("res://Source/RomanovLab/Models/1.glb"),
@@ -232,7 +234,12 @@ var room_config = {
 			"back" : "pass",
 			"right" : "7",
 			"left" : "pass",
-			"ratio_y" : -178.6
+			"ratio_y" : -178.6,
+			"lab_transf" : {
+				"pos" : "left",
+				"next_lab" : "rm_lab",
+				"next_room" : "5"
+			}
 		},
 		"9" : {
 			"forward" : "pass",

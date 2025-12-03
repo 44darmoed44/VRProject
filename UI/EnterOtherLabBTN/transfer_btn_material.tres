@@ -4,3 +4,4 @@
 blend_mode = 1
 no_depth_test = true
 diffuse_mode = 3
+billboard_keep_scale = true

@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://d4hx5x3tbgjuw" path="res://Models/RomanovLab/r_l_room.gd" id="1_8loum"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_ir0l2"]
 [ext_resource type="PackedScene" uid="uid://cuybed6oj7ffs" path="res://UI/TransferBTN/TransferBtn.tscn" id="2_8loum"]
-[ext_resource type="Material" uid="uid://p8uep76k3i86" path="res://UI/TransferBTN/transfer_btn_material.tres" id="3_tjiea"]
+[ext_resource type="Material" uid="uid://p8uep76k3i86" path="res://UI/EnterOtherLabBTN/transfer_btn_material.tres" id="3_tjiea"]
 
 [node name="RLRoom1" type="Node3D"]
 script = ExtResource("1_8loum")
+room_name = null
+type_laboratory = null
 
 [node name="SpawnPoint" type="Marker3D" parent="."]
 
@@ -49,4 +51,4 @@ room_updater = NodePath("..")
 [node name="TransfBTN" type="Node3D" parent="."]
 
 [node name="RoomModel" type="Node3D" parent="."]
-transform = Transform3D(3.8845372, 0, 0.95413387, 0, 4, 0, -0.95413387, 0, 3.8845372, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)

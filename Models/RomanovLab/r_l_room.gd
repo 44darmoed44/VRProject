@@ -21,6 +21,8 @@ func _ready():
 	load_room()
 	# connect animation finished signal
 	animator.connect("animation_finished", animation_finished) 
+	
+	RoomConfiguration.room_updater = self
 
 
 func load_room(new_room_name: String = room_name):
@@ -54,10 +56,7 @@ func load_room(new_room_name: String = room_name):
 			disable_transfer_btn(key)
 	
 	if lab_trasf_key == null:
-		var tn_children = transf_node.get_children()
-		if tn_children.size() > 0:
-			for child in tn_children:
-				child.queue_free()
+		clear_change_lab_btns()
 	else:
 		var tn_btn_inst : PackedScene = load("res://UI/EnterOtherLabBTN/lab_trans_viewport.tscn")
 		var tn_btn = tn_btn_inst.instantiate()
@@ -65,14 +64,46 @@ func load_room(new_room_name: String = room_name):
 		
 		var btn_par_dict = room_btn_dict[lab_trasf_key]
 		tn_btn.position = btn_dict[btn_par_dict["pos"]].position
-		tn_btn.position.y = 5
-		tn_btn.update_data(btn_par_dict["next_lab"], btn_par_dict["next_room"])
+		match btn_par_dict["pos"]:
+			"forward":
+				tn_btn.position.z -= 3
+			"back":
+				tn_btn.position.z += 3
+			"left":
+				tn_btn.position.x -= 3
+			"right":
+				tn_btn.position.x += 3
+		tn_btn.position.y = 3
+		#tn_btn.update_data(btn_par_dict["next_lab"], btn_par_dict["next_room"])
 	
 
 func clear_room():
 	room_model.remove_child(room)
 	room.queue_free()
  
+
+func update_room(new_room):
+	animator.play("transit_in")
+	next_room_name = new_room
+
+
+func clear_change_lab_btns():
+	var tn_children = transf_node.get_children()
+	if tn_children.size() > 0:
+		for child in tn_children:
+			child.queue_free()
+	
+
+
+func change_laboratory():
+	var lab_transf_dict = RoomConfiguration.room_config[type_laboratory][room_name]["lab_transf"]
+	var next_lab = lab_transf_dict["next_lab"]
+	var next_room = lab_transf_dict["next_room"]
+	type_laboratory = next_lab
+	next_room_name = next_room
+	clear_change_lab_btns()
+	animator.play("transit_in")
+
 
 func animation_finished(anim_name):
 	if anim_name == "transit_in":

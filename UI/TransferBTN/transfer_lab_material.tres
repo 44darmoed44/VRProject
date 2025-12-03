@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ffcr8neo5vry"]
+
+[resource]
+blend_mode = 1
+no_depth_test = true
+diffuse_mode = 3
+billboard_mode = 2
+billboard_keep_scale = true
