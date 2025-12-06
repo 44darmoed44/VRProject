@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dm4c3wrya6ytw"]
 
 [ext_resource type="Script" uid="uid://bco3stoc0msuy" path="res://Script/main.gd" id="1_06yma"]
-[ext_resource type="PackedScene" uid="uid://dxs5b88fq5cwa" path="res://Models/RomanovLab/r_l_room.tscn" id="1_j4qrl"]
+[ext_resource type="PackedScene" uid="uid://dxs5b88fq5cwa" path="res://Scene/MainBubble/r_l_room.tscn" id="1_j4qrl"]
 [ext_resource type="PackedScene" uid="uid://u372my003esv" path="res://Character/Scene/character.tscn" id="2_31fxm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwscp"]
@@ -87,7 +87,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 1.0000001, 0, -0.9999999, -4
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(25, 7.744827e-09, 4.629061e-23, -3.8724136e-07, 0.5, 0, -4.629061e-23, -1.4340511e-32, 25, 0, 0, 0)
+transform = Transform3D(25, 7.744827e-09, 4.629061e-23, -3.8724136e-07, 0.5, 0, -4.629061e-23, -1.4340511e-32, 25, 0, -0.2633329, 0)
 mesh = SubResource("BoxMesh_4kvl3")
 skeleton = NodePath("StaticBody3D")
 
@@ -97,8 +97,7 @@ skeleton = NodePath("StaticBody3D")
 shape = SubResource("BoxShape3D_06yma")
 
 [node name="RLRoom1" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("1_j4qrl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35668695, 0)
-room_name = "5"
+room_name = "13"
 type_laboratory = "rm_lab"
 animator = NodePath("../Animator")
 
@@ -108,4 +107,4 @@ libraries = {
 }
 
 [node name="Character" parent="." instance=ExtResource("2_31fxm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88961226, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96651256, 0)
