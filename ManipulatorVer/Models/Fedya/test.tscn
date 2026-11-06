@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwxi6ulv4dp41"]
+
+[ext_resource type="PackedScene" uid="uid://bgaalefttnicq" path="res://ManipulatorVer/Models/Fedya/ball.tscn" id="1_v7pvk"]
+[ext_resource type="PackedScene" uid="uid://rnx2dcv6gm4o" path="res://ManipulatorVer/Models/Fedya/cube.tscn" id="2_hvcpm"]
+[ext_resource type="PackedScene" uid="uid://dj1xo7vx3da5w" path="res://ManipulatorVer/Models/Fedya/speaker.tscn" id="3_kg3h0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hvcpm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_j4qrl"]
+sky_material = SubResource("ProceduralSkyMaterial_hvcpm")
+
+[sub_resource type="Environment" id="Environment_kg3h0"]
+background_mode = 2
+sky = SubResource("Sky_j4qrl")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_q60tg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yskrg"]
+
+[node name="Test" type="Node3D"]
+
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = SubResource("Environment_kg3h0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.95794, 0)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 7.74483e-09, 9.25812e-23, -7.74483e-07, 0.5, 0, -9.25812e-23, -1.43405e-32, 50, 0, -0.263333, 0)
+mesh = SubResource("BoxMesh_q60tg")
+skeleton = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_yskrg")
+
+[node name="Ball" parent="." instance=ExtResource("1_v7pvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342872, 9.27993, 0.251567)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809325, 0.587362, 0, -0.587362, 0.809325, 3.47903, 11.6837, 17.0329)
+
+[node name="Cube" parent="." instance=ExtResource("2_hvcpm")]
+transform = Transform3D(0.819722, 0.572761, 0, -0.572761, 0.819722, 0, 0, 0, 1, 1.65651, 7.59699, 3.65775)
+
+[node name="Speaker" parent="." instance=ExtResource("3_kg3h0")]
+transform = Transform3D(-0.320778, 0.580883, -0.748115, -2.98023e-08, 0.789855, 0.613293, 0.947154, 0.196731, -0.253368, -1.33527, 9.05532, -7.3839)

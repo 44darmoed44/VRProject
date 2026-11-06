@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dctesa7l1sv6b"]
+
+[ext_resource type="PackedScene" uid="uid://bfp0q8oybxd0a" path="res://ManipulatorVer/Lab.tscn" id="1_4b8ys"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Lab" parent="." instance=ExtResource("1_4b8ys")]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3t6yr8n7axdm"]
+
+[ext_resource type="PackedScene" uid="uid://bfp0q8oybxd0a" path="res://ManipulatorVer/Lab.tscn" id="1_jf6qu"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="2_k842w"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="2_n8s0t"]
+[ext_resource type="Script" uid="uid://b8o1kye1o0c7d" path="res://ManipulatorVer/VR/labvr.gd" id="2_u6tu8"]
+[ext_resource type="PackedScene" uid="uid://dgsqv3es3e2o8" path="res://ManipulatorVer/VR/Player/player.tscn" id="3_55ag4"]
+[ext_resource type="Script" uid="uid://dedwiqryod2wk" path="res://ManipulatorVer/VR/camera_controller.gd" id="6_7lh3p"]
+[ext_resource type="PackedScene" uid="uid://bgaalefttnicq" path="res://ManipulatorVer/Models/Fedya/ball.tscn" id="7_7lh3p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n8s0t"]
+size = Vector3(0.113388, 0.0386505, 0.112915)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7lh3p"]
+viewport_path = NodePath("CameraController/Cam1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0l0c"]
+albedo_color = Color(0.725325, 0, 0.155428, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y0l0c"]
+
+[node name="Main" type="Node3D"]
+
+[node name="StartXR" parent="." instance=ExtResource("2_k842w")]
+
+[node name="Lab" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_jf6qu")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("2_u6tu8")
+player = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("manipulator", "m_mode_label", "camera_controller") instance=ExtResource("3_55ag4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51748, 1.30841, -0.947349)
+manipulator = NodePath("../Lab/Manipulator")
+m_mode_label = NodePath("../CameraController/ManipulatorMode")
+camera_controller = NodePath("../CameraController")
+
+[node name="TableBTN" parent="." instance=ExtResource("2_n8s0t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80942, 1.26579, -1.76321)
+button = NodePath("../Lab/Btn/ButtonKey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TableBTN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000450134, 0.00807953, -0.0010376)
+shape = SubResource("BoxShape3D_n8s0t")
+
+[node name="DoorBtn" parent="." instance=ExtResource("2_n8s0t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20886, 1.26579, -1.76321)
+button = NodePath("../Lab/Btn2/ButtonKey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBtn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000450134, 0.00807953, -0.0010376)
+shape = SubResource("BoxShape3D_n8s0t")
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera_list", "camera_screen", "player", "lamp", "m_mode_label")]
+script = ExtResource("6_7lh3p")
+camera_list = [NodePath("Cam1"), NodePath("Cam2"), NodePath("Cam3")]
+camera_screen = NodePath("CameraScreen")
+player = NodePath("../Player")
+lamp = NodePath("Lamp")
+m_mode_label = NodePath("ManipulatorMode")
+
+[node name="Cam1" type="SubViewport" parent="CameraController"]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/Cam1"]
+transform = Transform3D(-4.37114e-08, -0.364877, 0.931056, 0, 0.931056, 0.364877, -1, 1.59493e-08, -4.06977e-08, 2.73848, 2.55291, -5.64511)
+
+[node name="Cam2" type="SubViewport" parent="CameraController"]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/Cam2"]
+transform = Transform3D(-4.37114e-08, 0.364877, -0.931056, -4.73656e-16, 0.931056, 0.364877, 1, 1.59493e-08, -4.06977e-08, -2.90783, 2.66575, -5.72177)
+
+[node name="Cam3" type="SubViewport" parent="CameraController"]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/Cam3"]
+transform = Transform3D(1, -1.79402e-15, 1.07443e-14, -2.25001e-15, 0.931056, 0.364877, -1.06581e-14, -0.364877, 0.931056, -0.0465517, 2.66575, -2.9581)
+
+[node name="CameraScreen" type="Sprite3D" parent="CameraController"]
+transform = Transform3D(0.0392786, 0, 0, 0, 0.0473749, -5.32907e-14, 0, 5.66867e-15, 0.254349, 1.49002, 1.61195, -2.55258)
+visible = false
+texture = SubResource("ViewportTexture_7lh3p")
+
+[node name="Lamp" type="MeshInstance3D" parent="CameraController"]
+transform = Transform3D(0.05, 0, 0, 0, -2.18557e-10, -0.05, 0, 0.005, -2.18557e-09, 1.87125, 1.36163, -2.53751)
+material_override = SubResource("StandardMaterial3D_y0l0c")
+mesh = SubResource("CylinderMesh_y0l0c")
+
+[node name="ManipulatorMode" type="Label3D" parent="CameraController"]
+transform = Transform3D(0.11977, 0, -0.0724924, 0, 0.14, 0, 0.0724924, 0, 0.11977, 2.40773, 1.53919, -2.15718)
+visible = false
+texture_filter = 0
+text = "Режим работы манипулятора:
+1"
+outline_size = 16
+
+[node name="Ball" parent="." instance=ExtResource("7_7lh3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219673, 1.21783, -5.4283)
+
+[connection signal="button_pressed" from="TableBTN" to="Lab" method="_on_table_btn_button_pressed"]
+[connection signal="button_pressed" from="DoorBtn" to="Lab" method="_on_door_btn_button_pressed"]
+
+[editable path="Lab"]

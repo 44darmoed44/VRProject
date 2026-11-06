@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddeqm564gc60q"]
+
+[ext_resource type="PackedScene" uid="uid://een6l0rdq0xq" path="res://ManipulatorVer/Models/frolova/grid_n.tscn" id="1_pbgp2"]
+
+[node name="Test" type="Node3D"]
+
+[node name="GridN" parent="." instance=ExtResource("1_pbgp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.7407, 28.6396, -10.6918)

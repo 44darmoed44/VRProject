@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfp0q8oybxd0a"]
+
+[ext_resource type="PackedScene" uid="uid://een6l0rdq0xq" path="res://ManipulatorVer/Models/frolova/grid_n.tscn" id="1_0w1vo"]
+[ext_resource type="PackedScene" uid="uid://diirfujksm41t" path="res://ManipulatorVer/Models/Manipulator/manipulator.tscn" id="2_jb5j7"]
+[ext_resource type="PackedScene" uid="uid://xm1xp6ng5ioy" path="res://ManipulatorVer/Models/Fedya/Trash bin.tscn" id="3_7ienr"]
+[ext_resource type="PackedScene" uid="uid://c3ug4j81ugo4j" path="res://ManipulatorVer/Models/Fedya/table.tscn" id="4_resiy"]
+[ext_resource type="PackedScene" uid="uid://b0okk0xg5t0h" path="res://ManipulatorVer/Models/Pasha/computre_table.tscn" id="5_7empx"]
+[ext_resource type="PackedScene" uid="uid://tn2tpvpx7q8i" path="res://ManipulatorVer/Models/Pasha/button_base.tscn" id="6_0w1vo"]
+[ext_resource type="PackedScene" uid="uid://c2kmopkqftckq" path="res://ManipulatorVer/Models/Pasha/button_key.tscn" id="6_qvhry"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_33drt"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_8atr1"]
+sky_material = SubResource("ProceduralSkyMaterial_33drt")
+
+[sub_resource type="Environment" id="Environment_81f5w"]
+background_mode = 2
+background_energy_multiplier = 0.84
+sky = SubResource("Sky_8atr1")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0spb"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81f5w"]
+albedo_color = Color(0.371652, 0.319424, 0.264066, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_soyep"]
+material = SubResource("StandardMaterial3D_81f5w")
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7empx"]
+size = Vector3(23.0682, 9.67288, 6.3103)
+
+[node name="Lab" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_81f5w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.515
+shadow_enabled = true
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276585, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_j0spb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D"]
+mesh = SubResource("BoxMesh_soyep")
+
+[node name="GridN" parent="." instance=ExtResource("1_0w1vo")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -7.72293, 0.293597, -8.83169)
+
+[node name="Manipulator" parent="." instance=ExtResource("2_jb5j7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0240805, -0.0265849, -22.9371)
+
+[node name="TrashBin" parent="." instance=ExtResource("3_7ienr")]
+transform = Transform3D(-1.45559e-08, 0, -0.523, 0, 0.333, 0, 0.333, 0, -2.28611e-08, 6.72062, 0.676773, -22.832)
+
+[node name="Table" parent="." instance=ExtResource("4_resiy")]
+transform = Transform3D(0.25, 0, 0, 0, 0.7, 0, 0, 0, 0.5, 0, -2.84125, -18.294)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32135, 4.33644, 0.340454)
+shape = SubResource("BoxShape3D_7empx")
+
+[node name="ComputreTable" parent="." instance=ExtResource("5_7empx")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 4.95335, -0.33023, -7.3383)
+
+[node name="Btn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0323, 4.18482, -5.8805)
+
+[node name="Button" parent="Btn" instance=ExtResource("6_0w1vo")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="ButtonKey" parent="Btn" instance=ExtResource("6_qvhry")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Btn"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0179119, -0.464194)
+text = "Управление
+роботом"
+
+[node name="Btn2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0323, 4.18482, -5.8805)
+
+[node name="Button" parent="Btn2" instance=ExtResource("6_0w1vo")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="ButtonKey" parent="Btn2" instance=ExtResource("6_qvhry")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Btn2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0179119, -0.464194)
+text = "Дверь"

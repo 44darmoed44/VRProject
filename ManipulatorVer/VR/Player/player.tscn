@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgsqv3es3e2o8"]
+
+[ext_resource type="PackedScene" uid="uid://cy03d57iyrci" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_physics_hand.tscn" id="1_g7pli"]
+[ext_resource type="Script" uid="uid://c6sopmyda3117" path="res://ManipulatorVer/VR/Player/player.gd" id="1_opt20"]
+[ext_resource type="PackedScene" uid="uid://kcqomcjq52np" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_physics_hand.tscn" id="2_l6fus"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_opt20"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="4_pknih"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="5_1iewo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_opt20"]
+radius = 0.256221
+
+[node name="Player" type="XROrigin3D"]
+script = ExtResource("1_opt20")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="LeftHand" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="LeftPhysicsHand" parent="LeftHand" instance=ExtResource("1_g7pli")]
+
+[node name="MovementDirect" parent="LeftHand" instance=ExtResource("2_opt20")]
+max_speed = 2.0
+
+[node name="RightHand" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="RightPhysicsHand" parent="RightHand" instance=ExtResource("2_l6fus")]
+
+[node name="MovementTurn" parent="RightHand" instance=ExtResource("4_pknih")]
+turn_mode = 1
+
+[node name="PlayerBody" parent="." instance=ExtResource("5_1iewo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01529, 0)
+shape = SubResource("CapsuleShape3D_opt20")
+
+[connection signal="change_move_flag" from="." to="." method="_on_change_move_flag"]
+[connection signal="button_released" from="LeftHand" to="." method="_on_left_hand_button_released"]
+[connection signal="input_vector2_changed" from="LeftHand" to="." method="_on_left_hand_input_vector_2_changed"]
+[connection signal="button_pressed" from="RightHand" to="." method="_on_right_hand_button_pressed"]
+[connection signal="button_released" from="RightHand" to="." method="_on_right_hand_button_released"]
