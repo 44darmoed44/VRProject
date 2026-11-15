@@ -6,8 +6,11 @@ extends CharacterBody3D
 @onready var screen_center_point := $Pivot/Camera3D/ColorRect
 @onready var camera := $Pivot/Camera3D
 
+@export var manipulator: Manipulator
+
 var move_speed := 250
 var mouse_sensitivity := 0.003
+var man_speed := 5.0
 
 var is_man_control := false
 var is_zooming := false
@@ -47,6 +50,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	interact_control()
 	if not is_man_control: movement_control(delta)
+	else: man_control(delta)
 	move_and_slide()
 
 
@@ -75,5 +79,28 @@ func interact_control() -> void:
 		screen_center_point.color = Color.WHITE
 
 
-func man_control() -> void:
-	pass
+func man_control(delta: float) -> void:
+	if Input.is_action_pressed("sh1_l"):
+		manipulator.y_axis.rotate_y(-man_speed * delta)
+	if Input.is_action_pressed("sh1_r"):
+		manipulator.y_axis.rotate_y(man_speed * delta)
+	if Input.is_action_pressed("sh2_u"):
+		manipulator.x_shoulder_1.rotate_z(-man_speed * delta)
+	if Input.is_action_pressed("sh2_d"):
+		manipulator.x_shoulder_1.rotate_z(man_speed * delta)
+	if Input.is_action_pressed("sh3_u"):
+		manipulator.x_shoulder_2.rotate_z(-man_speed * delta)
+	if Input.is_action_pressed("sh3_d"):
+		manipulator.x_shoulder_2.rotate_z(man_speed * delta)
+	if Input.is_action_pressed("sh4_u"):
+		manipulator.x_handle.rotate_z(-man_speed * delta)
+	if Input.is_action_pressed("sh4_d"):
+		manipulator.x_handle.rotate_z(man_speed * delta)
+	if Input.is_action_pressed("h_o"):
+		manipulator.open_m_arm_flag = true
+	else:
+		manipulator.open_m_arm_flag = false
+	if Input.is_action_pressed("h_c"): 
+		manipulator.close_m_arm_flag = true
+	else:
+		manipulator.close_m_arm_flag = false

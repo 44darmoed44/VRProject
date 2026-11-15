@@ -1,10 +1,28 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2jbigruyen0p"]
+[gd_scene load_steps=34 format=3 uid="uid://c2jbigruyen0p"]
 
 [ext_resource type="PackedScene" uid="uid://bfp0q8oybxd0a" path="res://ManipulatorVer/Lab.tscn" id="1_6rhv6"]
 [ext_resource type="PackedScene" uid="uid://dsynvejg5kib4" path="res://ManipulatorVer/PC/player.tscn" id="2_ur6sh"]
 [ext_resource type="Script" uid="uid://dcmy3u4nqrbit" path="res://ManipulatorVer/PC/door_btn.gd" id="3_byrda"]
 [ext_resource type="Script" uid="uid://bko04n3xx3hpi" path="res://ManipulatorVer/PC/rob_cont_btn.gd" id="4_c0yad"]
 [ext_resource type="Script" uid="uid://x0nap1xw03rm" path="res://ManipulatorVer/PC/pc_screens_manager.gd" id="5_8bcoj"]
+[ext_resource type="Texture2D" uid="uid://cpyfn08n7ice4" path="res://ManipulatorVer/Sprites/ManManual/rbt_s1.png" id="6_876rf"]
+[ext_resource type="Texture2D" uid="uid://oxwmidw2ed6f" path="res://ManipulatorVer/Sprites/ComputerUI/key_a.png" id="7_cf2xv"]
+[ext_resource type="Texture2D" uid="uid://w2v1mbah8uyg" path="res://ManipulatorVer/Sprites/ComputerUI/arrow.png" id="8_31f8y"]
+[ext_resource type="Texture2D" uid="uid://mqbr8qri8i76" path="res://ManipulatorVer/Sprites/ComputerUI/key_d.png" id="9_31f8y"]
+[ext_resource type="Texture2D" uid="uid://cifk08euopwl7" path="res://ManipulatorVer/Sprites/ManManual/rbt_s2.png" id="10_rnvdw"]
+[ext_resource type="Texture2D" uid="uid://7y2hipehbvdp" path="res://ManipulatorVer/Sprites/ComputerUI/key_o.png" id="10_rtpi8"]
+[ext_resource type="Texture2D" uid="uid://cyeksl8pf7t7t" path="res://ManipulatorVer/Sprites/ComputerUI/key_y.png" id="11_fdrdr"]
+[ext_resource type="Texture2D" uid="uid://rs4fyhco6tan" path="res://ManipulatorVer/Sprites/ComputerUI/key_p.png" id="11_nj400"]
+[ext_resource type="Texture2D" uid="uid://dvj5ruc0wf6xw" path="res://ManipulatorVer/Sprites/ComputerUI/key_h.png" id="12_nlpf0"]
+[ext_resource type="Texture2D" uid="uid://d2peg7n1ijbcs" path="res://ManipulatorVer/Sprites/ManManual/rbt_s3.png" id="13_fdrdr"]
+[ext_resource type="Texture2D" uid="uid://bscbi6r1gopr0" path="res://ManipulatorVer/Sprites/ComputerUI/key_u.png" id="14_ccwvp"]
+[ext_resource type="Texture2D" uid="uid://bdginr268o7tn" path="res://ManipulatorVer/Sprites/ComputerUI/key_j.png" id="15_w4j2b"]
+[ext_resource type="Texture2D" uid="uid://bain8rx2xamf" path="res://ManipulatorVer/Sprites/ManManual/rbt_s4.png" id="16_qp3pv"]
+[ext_resource type="Texture2D" uid="uid://de4fjeffbw12p" path="res://ManipulatorVer/Sprites/ComputerUI/key_i.png" id="17_maeyc"]
+[ext_resource type="Texture2D" uid="uid://bkv5jj6i4ynd" path="res://ManipulatorVer/Sprites/ComputerUI/key_k.png" id="18_mawhw"]
+[ext_resource type="Texture2D" uid="uid://bm33o0gfskb1g" path="res://ManipulatorVer/Sprites/ManManual/rbt_h.png" id="19_2cws2"]
+[ext_resource type="Texture2D" uid="uid://cd5lekwx2r5c3" path="res://ManipulatorVer/Sprites/ComputerUI/key_b.png" id="20_jteo3"]
+[ext_resource type="Texture2D" uid="uid://cm5expunt1mc4" path="res://ManipulatorVer/Sprites/ComputerUI/key_n.png" id="21_xdt5d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ur6sh"]
 size = Vector3(0.121094, 0.0300293, 0.128174)
@@ -94,8 +112,9 @@ material = SubResource("StandardMaterial3D_876rf")
 [node name="Lab" parent="." instance=ExtResource("1_6rhv6")]
 transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_ur6sh")]
+[node name="Player" parent="." node_paths=PackedStringArray("manipulator") instance=ExtResource("2_ur6sh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906178, 0)
+manipulator = NodePath("../Lab/Manipulator")
 
 [node name="Doors" type="Node3D" parent="."]
 
@@ -146,10 +165,11 @@ size = Vector2i(1280, 720)
 [node name="Cam2" type="Camera3D" parent="SubCameras/SubCam3"]
 transform = Transform3D(1.24928e-07, -0.513616, 0.85802, 2.24509e-08, 0.85802, 0.513616, -1, -4.49017e-08, 1.18722e-07, 2.90157, 2.78467, -6.1635)
 
-[node name="PCScreensManager" type="Node3D" parent="." node_paths=PackedStringArray("camera_list")]
+[node name="PCScreensManager" type="Node3D" parent="." node_paths=PackedStringArray("camera_list", "tips_list")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59631, 0, -2.27662)
 script = ExtResource("5_8bcoj")
 camera_list = [NodePath("../SubCameras/SubCam1"), NodePath("../SubCameras/SubCam2"), NodePath("../SubCameras/SubCam3")]
+tips_list = [NodePath("ManualScreen/Tip1"), NodePath("ManualScreen/Tip2"), NodePath("ManualScreen/Tip3"), NodePath("ManualScreen/Tip4"), NodePath("ManualScreen/Tip5")]
 
 [node name="Screen" type="Sprite3D" parent="PCScreensManager"]
 transform = Transform3D(0.0642522, 0, 0, 0, 0.0769517, 0, 0, 0, 0.3, 0.0155045, 1.54432, -0.49007)
@@ -172,5 +192,177 @@ mesh = SubResource("CylinderMesh_8bcoj")
 [node name="TextCamBaseScreen" type="MeshInstance3D" parent="PCScreensManager"]
 transform = Transform3D(0.360053, 0, 0, 0, 0.182422, 0, 0, 0, 0.0666073, -0.24865, 1.16959, -0.439)
 mesh = SubResource("BoxMesh_04v8y")
+
+[node name="ManualScreen" type="Node3D" parent="PCScreensManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960667, 1.21735, -0.132571)
+visible = false
+
+[node name="ManualTxt" type="Label3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.0772234, 0, -0.042612, 0, 0.0882, 0, 0.042612, 0, 0.0772234, 0.0577482, 0.374044, 0.0664065)
+text = "Руководство"
+font_size = 125
+
+[node name="Tip1" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+
+[node name="ManSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip1"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.0136866, 0.0251257, 0)
+texture = ExtResource("6_876rf")
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip1"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.22506, 0.106049, -2.23001e-05)
+texture = ExtResource("7_cf2xv")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip1"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.180098, 0.108744, 0.000213681)
+flip_h = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip1"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.224516, 0.0522719, -7.4666e-08)
+texture = ExtResource("9_31f8y")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip1"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.269932, 0.055764, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="Tip2" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+visible = false
+
+[node name="ManSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip2"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.0136866, 0.0251257, 0)
+texture = ExtResource("10_rnvdw")
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip2"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.22506, 0.106049, -2.23001e-05)
+texture = ExtResource("11_fdrdr")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip2"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.180098, 0.108744, 0.000213681)
+flip_h = true
+flip_v = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip2"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.224516, 0.0522719, -7.4666e-08)
+texture = ExtResource("12_nlpf0")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip2"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.269932, 0.055764, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="Tip3" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+visible = false
+
+[node name="ManSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip3"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.0136866, 0.0251257, 0)
+texture = ExtResource("13_fdrdr")
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip3"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.22506, 0.106049, -2.23001e-05)
+texture = ExtResource("14_ccwvp")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip3"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.180098, 0.108744, 0.000213681)
+flip_h = true
+flip_v = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip3"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.224516, 0.0522719, -7.4666e-08)
+texture = ExtResource("15_w4j2b")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip3"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.269932, 0.055764, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="Tip4" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+visible = false
+
+[node name="ManSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip4"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.0136866, 0.0251257, 0)
+texture = ExtResource("16_qp3pv")
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip4"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.22506, 0.106049, -2.23001e-05)
+texture = ExtResource("17_maeyc")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip4"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.180098, 0.108744, 0.000213681)
+flip_h = true
+flip_v = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip4"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.224516, 0.0522719, -7.4666e-08)
+texture = ExtResource("18_mawhw")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip4"]
+transform = Transform3D(-1.67196e-09, 0.03825, 0, -0.03825, -1.67196e-09, 0, 0, 0, 0.03825, 0.269932, 0.055764, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="Tip5" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+visible = false
+
+[node name="ManSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.0136866, 0.0251257, 0)
+texture = ExtResource("19_2cws2")
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.22506, 0.106049, -2.23001e-05)
+texture = ExtResource("20_jteo3")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(-0.03825, -3.34392e-09, 0, 3.34392e-09, -0.03825, 0, 0, 0, 0.03825, 0.180098, 0.108744, 0.000213681)
+flip_h = true
+flip_v = true
+texture = ExtResource("8_31f8y")
+
+[node name="ArrowSprite3" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(-0.03825, -3.34392e-09, 0, 3.34392e-09, -0.03825, 0, 0, 0, 0.03825, 0.269311, 0.108744, 0.000213681)
+flip_v = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.224516, 0.0522719, -7.4666e-08)
+texture = ExtResource("21_xdt5d")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.269932, 0.055764, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="ArrowSprite4" type="Sprite3D" parent="PCScreensManager/ManualScreen/Tip5"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.18093, 0.055764, -6.23621e-05)
+flip_h = true
+texture = ExtResource("8_31f8y")
+
+[node name="SlideChangeTip" type="Node3D" parent="PCScreensManager/ManualScreen"]
+transform = Transform3D(0.874823, 0, -0.484443, 0, 1, 0, 0.484443, 0, 0.874823, -0.0144378, 0.181026, 0.0281551)
+
+[node name="BtnSprtie" type="Sprite3D" parent="PCScreensManager/ManualScreen/SlideChangeTip"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.0410772, -0.129424, -2.23413e-05)
+texture = ExtResource("10_rtpi8")
+
+[node name="ArrowSprite" type="Sprite3D" parent="PCScreensManager/ManualScreen/SlideChangeTip"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, -0.00516135, -0.126742, 0.000213501)
+flip_h = true
+texture = ExtResource("8_31f8y")
+
+[node name="BtnSprtie2" type="Sprite3D" parent="PCScreensManager/ManualScreen/SlideChangeTip"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.118755, -0.128803, -7.4666e-08)
+texture = ExtResource("11_nj400")
+
+[node name="ArrowSprite2" type="Sprite3D" parent="PCScreensManager/ManualScreen/SlideChangeTip"]
+transform = Transform3D(0.03825, 0, 0, 0, 0.03825, 0, 0, 0, 0.03825, 0.16417, -0.125311, -6.23621e-05)
+texture = ExtResource("8_31f8y")
+
+[node name="ManualTxt2" type="Label3D" parent="PCScreensManager/ManualScreen/SlideChangeTip"]
+transform = Transform3D(0.0881999, 0, 0.000132401, 0, 0.0882, 0, -0.000132401, 0, 0.0881999, 0.0781556, -0.124578, -0.00150128)
+text = "1"
+font_size = 100
 
 [editable path="Lab"]

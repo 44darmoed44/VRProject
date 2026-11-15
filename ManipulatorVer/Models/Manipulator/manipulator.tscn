@@ -636,11 +636,12 @@ curve = SubResource("Curve3D_xelyi")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 loop = false
 
-[node name="arm_L" type="StaticBody3D" parent="y axis/x axis shoulder 2/x axis shoulder 3/x handle/PathArmL/ArmProgressL" node_paths=PackedStringArray("manipulator", "progress")]
+[node name="arm_L" type="StaticBody3D" parent="y axis/x axis shoulder 2/x axis shoulder 3/x handle/PathArmL/ArmProgressL" node_paths=PackedStringArray("manipulator", "progress", "checkbox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40364, 0.116007)
 script = ExtResource("2_mojvv")
 manipulator = NodePath("../../../../../../..")
 progress = NodePath("..")
+checkbox = NodePath("Area3D")
 
 [node name="mesh" type="MeshInstance3D" parent="y axis/x axis shoulder 2/x axis shoulder 3/x handle/PathArmL/ArmProgressL/arm_L"]
 transform = Transform3D(0.714513, 0, 0, 0, 0.81606, 0, 0, 0, 0.0687409, 0, 0, 0)
