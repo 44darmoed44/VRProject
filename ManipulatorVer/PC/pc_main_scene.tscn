@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2jbigruyen0p"]
+[gd_scene load_steps=16 format=3 uid="uid://c2jbigruyen0p"]
 
 [ext_resource type="PackedScene" uid="uid://bfp0q8oybxd0a" path="res://ManipulatorVer/Lab.tscn" id="1_6rhv6"]
 [ext_resource type="PackedScene" uid="uid://dsynvejg5kib4" path="res://ManipulatorVer/PC/player.tscn" id="2_ur6sh"]
 [ext_resource type="Script" uid="uid://dcmy3u4nqrbit" path="res://ManipulatorVer/PC/door_btn.gd" id="3_byrda"]
 [ext_resource type="Script" uid="uid://bko04n3xx3hpi" path="res://ManipulatorVer/PC/rob_cont_btn.gd" id="4_c0yad"]
+[ext_resource type="Script" uid="uid://x0nap1xw03rm" path="res://ManipulatorVer/PC/pc_screens_manager.gd" id="5_8bcoj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ur6sh"]
 size = Vector3(0.121094, 0.0300293, 0.128174)
@@ -74,6 +75,20 @@ _data = {
 &"man_control_btn_press": SubResource("Animation_c0yad")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_8bcoj"]
+viewport_path = NodePath("SubCameras/SubCam1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bcoj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8bcoj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_876rf"]
+albedo_color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_04v8y"]
+material = SubResource("StandardMaterial3D_876rf")
+
 [node name="PcMainScene" type="Node3D"]
 
 [node name="Lab" parent="." instance=ExtResource("1_6rhv6")]
@@ -94,11 +109,12 @@ grid = NodePath("../../Lab/GridN")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00195313, -0.00158691, 0.00109863)
 shape = SubResource("BoxShape3D_ur6sh")
 
-[node name="RobContBTN" type="Area3D" parent="Doors" node_paths=PackedStringArray("player", "animator") groups=["InteractiveObject"]]
+[node name="RobContBTN" type="Area3D" parent="Doors" node_paths=PackedStringArray("player", "animator", "pc_screens_manager") groups=["InteractiveObject"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95851, 1.18261, -1.91321)
 script = ExtResource("4_c0yad")
 player = NodePath("../../Player")
 animator = NodePath("../AnimationPlayer")
+pc_screens_manager = NodePath("../../PCScreensManager")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/RobContBTN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00195313, -0.00158691, 0.00109863)
@@ -109,5 +125,52 @@ root_node = NodePath("../DoorBTN")
 libraries = {
 &"": SubResource("AnimationLibrary_byrda")
 }
+
+[node name="SubCameras" type="Node3D" parent="."]
+
+[node name="SubCam1" type="SubViewport" parent="SubCameras"]
+size = Vector2i(1280, 720)
+
+[node name="Camera" type="Camera3D" parent="SubCameras/SubCam1"]
+transform = Transform3D(-3.75052e-08, 0.513616, -0.85802, 2.24509e-08, 0.85802, 0.513616, 1, 0, -4.37114e-08, -3.18528, 2.78467, -6.1635)
+
+[node name="SubCam2" type="SubViewport" parent="SubCameras"]
+size = Vector2i(1280, 720)
+
+[node name="Cam3" type="Camera3D" parent="SubCameras/SubCam2"]
+transform = Transform3D(1, 6.73526e-08, -1.56227e-07, 2.24509e-08, 0.85802, 0.513616, 1.68639e-07, -0.513616, 0.85802, -0.0339537, 2.78467, -3.1635)
+
+[node name="SubCam3" type="SubViewport" parent="SubCameras"]
+size = Vector2i(1280, 720)
+
+[node name="Cam2" type="Camera3D" parent="SubCameras/SubCam3"]
+transform = Transform3D(1.24928e-07, -0.513616, 0.85802, 2.24509e-08, 0.85802, 0.513616, -1, -4.49017e-08, 1.18722e-07, 2.90157, 2.78467, -6.1635)
+
+[node name="PCScreensManager" type="Node3D" parent="." node_paths=PackedStringArray("camera_list")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59631, 0, -2.27662)
+script = ExtResource("5_8bcoj")
+camera_list = [NodePath("../SubCameras/SubCam1"), NodePath("../SubCameras/SubCam2"), NodePath("../SubCameras/SubCam3")]
+
+[node name="Screen" type="Sprite3D" parent="PCScreensManager"]
+transform = Transform3D(0.0642522, 0, 0, 0, 0.0769517, 0, 0, 0, 0.3, 0.0155045, 1.54432, -0.49007)
+visible = false
+texture = SubResource("ViewportTexture_8bcoj")
+
+[node name="TextCamNum" type="Label3D" parent="PCScreensManager/Screen"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.18658, 1.2139, -2.68164)
+top_level = true
+text = "Camera <num>"
+font_size = 125
+outline_size = 10
+horizontal_alignment = 0
+
+[node name="PowerLight" type="MeshInstance3D" parent="PCScreensManager"]
+transform = Transform3D(0.032, 0, 0, 0, -1.95504e-10, -0.032, 0, 0.00447262, -1.39876e-09, 0.444418, 1.25669, -0.476866)
+material_override = SubResource("StandardMaterial3D_8bcoj")
+mesh = SubResource("CylinderMesh_8bcoj")
+
+[node name="TextCamBaseScreen" type="MeshInstance3D" parent="PCScreensManager"]
+transform = Transform3D(0.360053, 0, 0, 0, 0.182422, 0, 0, 0, 0.0666073, -0.24865, 1.16959, -0.439)
+mesh = SubResource("BoxMesh_04v8y")
 
 [editable path="Lab"]

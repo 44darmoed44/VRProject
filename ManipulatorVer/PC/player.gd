@@ -4,11 +4,14 @@ extends CharacterBody3D
 @onready var pivot := $Pivot
 @onready var ray_cast := $Pivot/Camera3D/RayCast3D
 @onready var screen_center_point := $Pivot/Camera3D/ColorRect
+@onready var camera := $Pivot/Camera3D
 
 var move_speed := 250
 var mouse_sensitivity := 0.003
 
 var is_man_control := false
+var is_zooming := false
+var is_r_btn_mouse_pressed := false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -16,6 +19,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if Input.is_mouse_button_pressed(1) and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if not is_r_btn_mouse_pressed:
+			is_zooming = not is_zooming
+			if is_zooming: 
+				camera.fov = 35
+				mouse_sensitivity = 0.0015
+			else: 
+				camera.fov = 75
+				mouse_sensitivity = 0.003
+			is_r_btn_mouse_pressed = true
+	else: is_r_btn_mouse_pressed = false
+	
 	
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and \
 											event is InputEventMouseMotion:
@@ -57,5 +73,7 @@ func interact_control() -> void:
 			obj.emit_signal("interact")
 	else:
 		screen_center_point.color = Color.WHITE
-	
-	
+
+
+func man_control() -> void:
+	pass
