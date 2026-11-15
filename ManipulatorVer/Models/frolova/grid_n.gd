@@ -1,3 +1,4 @@
+class_name GridN
 extends Node3D
 
 signal open_door

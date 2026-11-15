@@ -35,7 +35,7 @@ m_mode_label = NodePath("../CameraController/ManipulatorMode")
 camera_controller = NodePath("../CameraController")
 
 [node name="TableBTN" parent="." instance=ExtResource("2_n8s0t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80942, 1.26579, -1.76321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80942, 1.08113, -1.76321)
 button = NodePath("../Lab/Btn/ButtonKey")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TableBTN"]
@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000450134, 0.00807953, -0.0
 shape = SubResource("BoxShape3D_n8s0t")
 
 [node name="DoorBtn" parent="." instance=ExtResource("2_n8s0t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20886, 1.26579, -1.76321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20886, 1.08045, -1.76321)
 button = NodePath("../Lab/Btn2/ButtonKey")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBtn"]

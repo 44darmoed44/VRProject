@@ -76,10 +76,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32135, 4.33644, 0.340454)
 shape = SubResource("BoxShape3D_7empx")
 
 [node name="ComputreTable" parent="." instance=ExtResource("5_7empx")]
-transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 4.95335, -0.33023, -7.3383)
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 4.95335, -0.956012, -7.3383)
 
 [node name="Btn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0323, 4.18482, -5.8805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0323, 3.55904, -5.8805)
 
 [node name="Button" parent="Btn" instance=ExtResource("6_0w1vo")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -93,7 +93,7 @@ text = "Управление
 роботом"
 
 [node name="Btn2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0323, 4.18482, -5.8805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0323, 3.55904, -5.8805)
 
 [node name="Button" parent="Btn2" instance=ExtResource("6_0w1vo")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

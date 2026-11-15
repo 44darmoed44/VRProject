@@ -1,12 +1,113 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2jbigruyen0p"]
+[gd_scene load_steps=10 format=3 uid="uid://c2jbigruyen0p"]
 
 [ext_resource type="PackedScene" uid="uid://bfp0q8oybxd0a" path="res://ManipulatorVer/Lab.tscn" id="1_6rhv6"]
 [ext_resource type="PackedScene" uid="uid://dsynvejg5kib4" path="res://ManipulatorVer/PC/player.tscn" id="2_ur6sh"]
+[ext_resource type="Script" uid="uid://dcmy3u4nqrbit" path="res://ManipulatorVer/PC/door_btn.gd" id="3_byrda"]
+[ext_resource type="Script" uid="uid://bko04n3xx3hpi" path="res://ManipulatorVer/PC/rob_cont_btn.gd" id="4_c0yad"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ur6sh"]
+size = Vector3(0.121094, 0.0300293, 0.128174)
+
+[sub_resource type="Animation" id="Animation_byrda"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Lab/Btn2/ButtonKey:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Lab/Btn/ButtonKey:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ur6sh"]
+resource_name = "door_btn_press"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Lab/Btn2/ButtonKey:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.038693, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c0yad"]
+resource_name = "man_control_btn_press"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Lab/Btn/ButtonKey:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.039, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byrda"]
+_data = {
+&"RESET": SubResource("Animation_byrda"),
+&"door_btn_press": SubResource("Animation_ur6sh"),
+&"man_control_btn_press": SubResource("Animation_c0yad")
+}
 
 [node name="PcMainScene" type="Node3D"]
 
 [node name="Lab" parent="." instance=ExtResource("1_6rhv6")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_ur6sh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.906178, 0)
+
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="DoorBTN" type="Area3D" parent="Doors" node_paths=PackedStringArray("animator", "grid") groups=["InteractiveObject"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30937, 1.18261, -1.91321)
+script = ExtResource("3_byrda")
+animator = NodePath("../AnimationPlayer")
+grid = NodePath("../../Lab/GridN")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/DoorBTN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00195313, -0.00158691, 0.00109863)
+shape = SubResource("BoxShape3D_ur6sh")
+
+[node name="RobContBTN" type="Area3D" parent="Doors" node_paths=PackedStringArray("player", "animator") groups=["InteractiveObject"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95851, 1.18261, -1.91321)
+script = ExtResource("4_c0yad")
+player = NodePath("../../Player")
+animator = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/RobContBTN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00195313, -0.00158691, 0.00109863)
+shape = SubResource("BoxShape3D_ur6sh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Doors"]
+root_node = NodePath("../DoorBTN")
+libraries = {
+&"": SubResource("AnimationLibrary_byrda")
+}
+
+[editable path="Lab"]

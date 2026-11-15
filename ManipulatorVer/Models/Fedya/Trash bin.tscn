@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://xm1xp6ng5ioy"]
+[gd_scene load_steps=8 format=4 uid="uid://xm1xp6ng5ioy"]
 
 [ext_resource type="Script" uid="uid://dljiihf87xksg" path="res://ManipulatorVer/Models/Fedya/trash_bin.gd" id="1_hsvvj"]
 
@@ -41,7 +41,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sjq5k")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gln75"]
-size = Vector3(12.6963, 3.85721, 7.5022)
+size = Vector3(12.4071, 3.85721, 6.72589)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ode5a"]
+size = Vector3(0.228516, 8.07672, 7.90405)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0h4o"]
+size = Vector3(13.562, 7.9707, 0.315674)
 
 [node name="TrashBin" type="Node3D"]
 script = ExtResource("1_hsvvj")
@@ -55,8 +61,26 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.71814, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.90036, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199889, -6.90036, 0.024261)
 shape = SubResource("BoxShape3D_gln75")
 debug_color = Color(1, 1, 1, 0.42)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.86572, 1.68106, 0)
+shape = SubResource("BoxShape3D_ode5a")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5058, 1.68106, 0)
+shape = SubResource("BoxShape3D_ode5a")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.182861, 1.66113, -3.80286)
+shape = SubResource("BoxShape3D_g0h4o")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.182861, 1.66113, 3.81065)
+shape = SubResource("BoxShape3D_g0h4o")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
